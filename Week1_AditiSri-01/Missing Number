@@ -1,0 +1,9 @@
+int missingNumber(int* nums, int numsSize) {
+        int sum_arr = 0;
+        int sum_all = (numsSize * (numsSize + 1)) / 2;
+        for(int i = 0; i < numsSize; i++)
+        {
+            sum_arr += nums[i];
+        }
+        return sum_all - sum_arr;
+}
