@@ -1,0 +1,32 @@
+#include <stdio.h> 
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+};
+
+struct Node* reverseInGroups(struct Node* head, int k) {
+    struct Node *current = head, *temp = NULL;
+    int count = 0;
+
+    while (current && count < k) {
+        temp = current->prev;
+        current->prev = current->next;
+        current->next = temp;
+        current = current->prev;
+        count++;
+    }
+
+    if (temp)
+        head = temp->prev;
+
+    if (current) {
+        struct Node* rest = reverseInGroups(current, k);
+        if (head->next)
+            head->next->prev = head;
+        head->next = rest;
+    }
+
+    return head;
+}
